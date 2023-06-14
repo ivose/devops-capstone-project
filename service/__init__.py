@@ -6,11 +6,22 @@ and SQL database
 """
 import sys
 from flask import Flask
+from flask_talisman import Talisman
+from flask_cors import CORS
 from service import config
 from service.common import log_handlers
 
 # Create Flask application
 app = Flask(__name__)
+csp = {
+    'default-src': '\'self\'',
+    'object-src': '\'none\''
+}
+talisman = Talisman(app,
+                    content_security_policy=csp,
+                    content_security_policy_nonce_in=['script-src'],
+                    referrer_policy='strict-origin-when-cross-origin')
+CORS(app)
 app.config.from_object(config)
 
 # Import the routes After the Flask app is created
