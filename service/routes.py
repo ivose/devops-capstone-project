@@ -52,7 +52,7 @@ def create_accounts():
     message = account.serialize()
     # Uncomment once get_accounts has been implemented
     location_url = url_for("get_accounts", account_id=account.id, _external=True)
-    #location_url = "/"  # Remove once get_accounts has been implemented
+    # location_url = "/"  # Remove once get_accounts has been implemented
     return make_response(
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
@@ -60,6 +60,7 @@ def create_accounts():
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
+
 
 @app.route("/accounts", methods=["GET"])
 def list_accounts():
@@ -109,6 +110,7 @@ def update_accounts(account_id):
     account.update()
     return jsonify(account.serialize()), status.HTTP_200_OK
 
+
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
@@ -126,11 +128,9 @@ def delete_accounts(account_id):
     return "", status.HTTP_204_NO_CONTENT
 
 
-
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
 ######################################################################
-
 
 def check_content_type(media_type):
     """Checks that the media type is correct"""
@@ -142,3 +142,4 @@ def check_content_type(media_type):
         status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
         f"Content-Type must be {media_type}",
     )
+    
